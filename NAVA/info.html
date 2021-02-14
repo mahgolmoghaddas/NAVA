@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>main page</title>
+    <link rel="stylesheet" href="bootstrap.css" />
+    <link rel="stylesheet" href="style/style.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-default">
+      <div class="container">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="index.html">Movie Information</a>
+        </div>
+      </div>
+    </nav>
+    <div class="container">
+    </div>
+
+    <br />
+    <div id="result" style="padding: 20px" class="well"></div>
+  </body>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="advanced.js"></script>
+  <script>let movieId = sessionStorage.getItem("movieId");
+    var result = "";
+    var url = "http://www.omdbapi.com/?apikey=" + "2f5bc511";
+    $.ajax({
+      methd: "GET",
+      url: url + "&i=" + movieId,
+      success: function (data) {
+        console.log(data);
+  
+        result = `
+          
+        <div class="row"> 
+          <div class="col-md-4">
+          <img  width="300"  height="300" src="${data.Poster}">
+            </div>
+            <div class="col-md-8">
+              <h2>${data.Title}</h2>
+              <ul class="list-group">
+                <li class="list-group-item" style="float: right"><strong>Genre:</strong> ${data.Genre}</li>
+                <li class="list-group-item" style="float: right"><strong>Released:</strong> ${data.Released}</li>
+                <li class="list-group-item" style="float: right"><strong>Rated:</strong> ${data.Rated}</li>
+                <li class="list-group-item" style="float: right"><strong>IMDB Rating</strong> ${data.imdbRating}</li>
+                <li class="list-group-item" style="float: right"><strong>Director:</strong> ${data.Director}</li>
+                <li class="list-group-item" style="float: right"><strong>Writer:</strong> ${data.Writer}</li>
+                <li class="list-group-item" style="float: right"><strong>Actors:</strong> ${data.Actors}</li>
+              </ul>
+            </div>
+            </div>
+            <div class="row">
+              <div class="well">
+              <a href="index.html" class="btn btn-info">Go Back</a>
+  
+              </div>
+          `;
+        $("#result").html(result);
+      },
+    });</script>
+</body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  
+  
+</html>
